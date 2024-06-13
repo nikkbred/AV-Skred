@@ -56,12 +56,16 @@ class app():
             self.flomvei_radio = st.toggle('Gjennomfør flomveisanalyse :ocean: (Dette vil ta noen minutter lengre tid)')
 
 
-            save_path = Path(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS', self.tif_file.name)
-            with open(save_path, mode='wb') as w:
-                w.write(self.tif_file.getvalue())
+            try:
+                save_path = Path(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS', self.tif_file.name)
+                with open(save_path, mode='wb') as w:
+                    w.write(self.tif_file.getvalue())
+            except AttributeError:
+                pass
 
 
-#Starter produskjon av kart ved klikk på knapp ved metoden run_maps()
+
+    #Starter produskjon av kart ved klikk på knapp ved metoden run_maps()
         if st.button('Generer kart'):
             if self.out['all_drawings'] != None:
                 self.execute_function_when_filled()
