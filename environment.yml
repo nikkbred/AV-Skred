@@ -1,0 +1,21 @@
+name: AV-Skred_conda
+channels:
+  - esri
+  - conda-forge
+  - defaults
+dependencies:
+  - arcgis=2.3.0.2
+  - arcgispro=3.3
+  - arcpy=3.3
+  - arcpy-base=3.3
+  - pandas=2.0.2
+  - pip=24.0
+  - re2=2023.06.02
+  - zipp=3.17.0=py311haa95532_0
+  - pip:
+      - folium==0.16.0
+      - gitpython==3.1.43
+      - pillow==10.3.0
+      - pyproj==3.6.1
+      - streamlit==1.35.0
+      - streamlit-folium==0.20.0
