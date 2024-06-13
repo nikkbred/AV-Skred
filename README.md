@@ -1,0 +1,1 @@
+Webapp som lar bruker velge utsnitt av kart samt påvirknings-og kartleggingsområde i tillegg til noen andre inputs, kartene blir deretter produsert i ArcGIS og output er en zippet fil med hele ArcGIS prosjektet og en rapport som wordfil med kartene riktig plassert og de andre inputene.
