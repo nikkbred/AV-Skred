@@ -21,7 +21,6 @@ import re
 import tempfile
 
 
-
 class app():
     def __init__(self):
         self.settings()
