@@ -196,11 +196,12 @@ class app():
 #Sjekker antall filer i mappen hvert 5 sek og kaller metoden 'report()' når antallet er nådd
     def execute_function_when_filled(self):
         with st.spinner('Jobber med saken, dette vil ta flere minutter :coffee:'):
-            MakeMaps(bkmk='MyBookmark', tif_file=self.tif_file.name, zoom_events=self.zoom_events,
-                     zoom_overview=self.zoom_overview, oppdragsnummer=self.oppdragsnummer, dato=self.dato,
-                     av=self.av, ks=self.ks, oppgiver=self.oppgiver,
-                     polygons=str(self.draw_areas(self.out)), extent=str(self.utm_south+self.utm_north), flom=self.flomvei_radio)
             self.report()
+            #MakeMaps(bkmk='MyBookmark', tif_file=self.tif_file.name, zoom_events=self.zoom_events,
+             #        zoom_overview=self.zoom_overview, oppdragsnummer=self.oppdragsnummer, dato=self.dato,
+              #       av=self.av, ks=self.ks, oppgiver=self.oppgiver,
+               #      polygons=str(self.draw_areas(self.out)), extent=str(self.utm_south+self.utm_north), flom=self.flomvei_radio)
+            #self.report()
 
 
 #Setter sammen rapport med kartene og setter inn tekst fra input
@@ -218,6 +219,7 @@ class app():
 
             # Setter inn kartene og input på steder i malen som har en spesiell tekst
             def insert_jpg_into_word(word_string, print_map):
+                global map_line
                 for paragraph_index, paragraph in enumerate(document.paragraphs):
                     if word_string in paragraph.text:
                         map_line = paragraph_index
@@ -303,37 +305,37 @@ class app():
 
                     zip_directory_exclude_lock(f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS',f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}')
 
-                    if os.path.exists(
-                            f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}.zip'):
-                        st.balloons()
+                if os.path.exists(
+                        f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}.zip'):
+                    st.balloons()
 
-                        st.write('Prosjektet er ferdig, last ned zippet fil med rapport og ArcGIS Pro-prosjektmappen.')
+                    st.write('Prosjektet er ferdig, last ned zippet fil med rapport og ArcGIS Pro-prosjektmappen.')
 
 #Funksjonen sletter midlertidig data og reloader siden etter zip-filen er lastet ned
-                        def reset():
-                            time.sleep(4)
-                            for filename in os.listdir(
-                                    r'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS\\eksporterte_kart'):
-                                if os.path.isfile(os.path.join(
-                                        r'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS\\eksporterte_kart',
-                                        filename)):
-                                    os.remove(os.path.join(r'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS\\eksporterte_kart', filename))
+                    def reset():
+                        time.sleep(4)
+                        for filename in os.listdir(
+                                r'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS\\eksporterte_kart'):
+                            if os.path.isfile(os.path.join(
+                                    r'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS\\eksporterte_kart',
+                                    filename)):
+                                os.remove(os.path.join(r'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS\\eksporterte_kart', filename))
 
-                            if os.path.isfile(
-                                    f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}.zip'):
-                                os.remove(f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}.zip')
-                                os.remove(f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS\\RAPPORT\\Skredfarerapport- {self.sted}.docx')
+                        if os.path.isfile(
+                                f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}.zip'):
+                            os.remove(f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}.zip')
+                            os.remove(f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\GIS\\RAPPORT\\Skredfarerapport- {self.sted}.docx')
 
-                            if os.path.isfile(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS\Kartleggingsområdet.shp'):
-                                os.remove(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS\Kartleggingsområdet.shp')
+                        if os.path.isfile(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS\Kartleggingsområdet.shp'):
+                            os.remove(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS\Kartleggingsområdet.shp')
 
-                            if os.path.isfile(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS\Påvirkningsområdet.shp'):
-                                os.remove(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS\Påvirkningsområdet.shp')
+                        if os.path.isfile(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS\Påvirkningsområdet.shp'):
+                            os.remove(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS\Påvirkningsområdet.shp')
 
-                            if os.path.isfile(os.path.join(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS', self.tif_file.name)):
-                                os.remove(os.path.join(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS', self.tif_file.name))
+                        if os.path.isfile(os.path.join(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS', self.tif_file.name)):
+                            os.remove(os.path.join(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\GIS', self.tif_file.name))
 
-                            st.rerun()
+                        st.rerun()
 
 
 
@@ -346,13 +348,13 @@ class app():
                                 mime="application/zip", on_click=reset)
 
         if self.s == 'S2' and self.norsk == 'Nynorsk':
-            velg_rapport('RIGberg_Skredfareutgreiing_nynorsk_S2')
+            velg_rapport('RIGberg_Skredfareutgreiing_nynorsk_S2.docx')
         elif self.s == 'S2' and self.norsk == 'Bokmål':
-            velg_rapport('RIGberg_Skredfareutredning_bokmål_S2')
+            velg_rapport('RIGberg_Skredfareutredning_bokmål_S2.docx')
         elif self.s == 'S3' and self.norsk == 'Nynorsk':
-            velg_rapport('RIGberg_Skredfareutgreiing_nynorsk_S3')
+            velg_rapport('RIGberg_Skredfareutgreiing_nynorsk_S3.docx')
         elif self.s == 'S3' and self.norsk == 'Bokmål':
-            velg_rapport('RIGberg_Skredfareutredning_bokmål_S3')
+            velg_rapport('RIGberg_Skredfareutredning_bokmål_S3.docx')
 
 
     def main(self):
