@@ -77,11 +77,12 @@ class app():
 
 #Metoden for det interaktive kartet
     #tiles = 'https://services.geodataonline.no/arcgis/rest/services/Geocache_UTM33_EUREF89/GeocacheBilder/MapServer', attr = "Kilde: geodata.no"
+    #'polyline':{'showLength': True, 'metric': True, 'feet': False}
     def interactive_map(self):
         m = folium.Map(location=[65, 11], zoom_start=5, tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',attr = "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community")
 
         Draw(export=False,
-             draw_options={'polyline': {'showLength': True, 'metric': True, 'feet': False},
+             draw_options={'polyline': False,
                               'rectangle': False,
                               'polygon': {'showArea': True, 'showLength': False, 'metric': False, 'feet': False},
                               'circle': False,
@@ -204,7 +205,7 @@ class app():
 
 #Setter sammen rapport med kartene og setter inn tekst fra input
     def report(self):
-        dir = r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\APP'
+        dir = r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\Rapporter'
 
 
 #Skiller mellom 4 maler, en for S2 og en for S3, en for bokmål og en for nynorsk
@@ -257,7 +258,7 @@ class app():
             insert_jpg_into_word('[BERGGRUNN]', 'Berggrunn.jpg')
             if self.flomvei_radio == True:
                 insert_jpg_into_word('[DRENERING]', 'Drenering.jpg')
-                insert_jpg_into_word('[SKYGGE]', 'Skygge.jpg')
+            insert_jpg_into_word('[SKYGGE]', 'Skygge.jpg')
             insert_jpg_into_word('[V_SKOG]', 'V_Skog A3.jpg')
             insert_jpg_into_word('[V_HELNING]', 'V_Helning A3.jpg')
 
@@ -336,7 +337,7 @@ class app():
 
 
 
-                        with open(f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}.zip', 'rb') as fp:
+                        with open(f'S:\\Felles\\SamferdselInfrastruktur\\skredmal_streamlit\\Skredfarerapport- {self.sted}.zip','rb') as fp:
 
                             st.download_button(
                                 label="Last ned ZIP",
