@@ -632,8 +632,8 @@ class MakeMaps():
         outHillshade.save(hillshade_raster)
         sky.addDataFromPath(hillshade_raster)
 
-        if sky.listLayers()[0].symbology.colorizer.type == 'RasterUniqueValueColorizer':
-            self._set_symbology(os.path.join(directory, r'LYR\Hillshade.lyrx'), sky)
+        #if sky.listLayers()[0].symbology.colorizer.type == 'RasterUniqueValueColorizer':
+         #   self._set_symbology(os.path.join(directory, r'LYR\Hillshade.lyrx'), sky)
 
         self._del_from_legend(self._find_layout_index('Skygge'),'Relieff')
         self._add_to_legend(self._find_layout_index('Skygge'),self._find_layer_index(sky,'Relieff'))
@@ -718,21 +718,21 @@ class MakeMaps():
 
 if __name__ == "__main__":
     def has_run():
-        flag_file_path = r"C:\Users\niklas.brede\PycharmProjects\skredmal\first_run.flag"
+        flag_file_path = r"S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\first_run.flag"
 
         if not os.path.exists(flag_file_path):
 
             with open(flag_file_path, "w") as flag_file:
                 flag_file.write("This flag indicates that the script has been run once.")
 
-            os.system(r'streamlit run C:\Users\niklas.brede\PycharmProjects\skredmal\streamgis.py')
+            os.system(r'streamlit run S:\Felles\SamferdselInfrastruktur\skredmal_streamlit\streamgis.py')
 
         else:
             pass
 
 
     def exit_handler():
-        os.remove(os.path.join(r'C:\Users\niklas.brede\PycharmProjects\skredmal', 'first_run.flag'))
+        os.remove(os.path.join(r'S:\Felles\SamferdselInfrastruktur\skredmal_streamlit', 'first_run.flag'))
 
 
     has_run()
